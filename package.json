@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/MoonMoonDogo/paper-turtle/issues"
   },
-  "homepage": "https://github.com/MoonMoonDogo/paper-turtle#readme"
+  "homepage": "https://github.com/MoonMoonDogo/paper-turtle#readme",
+  "dependencies": {
+    "commander": "^2.14.0"
+  }
 }
