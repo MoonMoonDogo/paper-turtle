@@ -3207,32 +3207,22 @@ function getStringWords(string) {
 
 const program = require('commander');
 program
-    .option('-d, --decode [mnemonic]')
-    .option('-e, --encode [spend_key] [view_key]')
-    .parse(process.argv);
+    .command('decode [mnemonic]')
+    .action(function(mnemonic) {
+        let seed = mn_decode(mnemonic);
+        let keys = cnUtil.create_address(seed);
+        console.log("Correct way:")
+        console.log("-------------------")
+        console.log("Address  : " + keys.public_addr);
+        console.log("View Key : " + keys.view.sec);
+        console.log("Spend Key: " + keys.spend.sec);
+    });
 
-let mnemonic = program.decode;
-let spend_key = program.spend_key;
-let view_key = program.view_key;
+program
+    .command('encode [spend_key] [view_key]')
+    .action(function(spend_key, view_key) {
+        let words = mn_encode(spend_key);
+        console.log(words);
+    });
 
-if (mnemonic) {
-    let seed = mn_decode(mnemonic);
-    let keys = cnUtil.create_address(seed);
-    console.log("Correct way:")
-    console.log("-------------------")
-    console.log("Address  : " + keys.public_addr);
-    console.log("View Key : " + keys.view.sec);
-    console.log("Spend Key: " + keys.spend.sec);
-
-    var words = getStringWords(mnemonic);
-	seed = CryptoJS.SHA256(salt + words.join(' ')).toString();
-    keys = cnUtil.create_address(seed);
-    console.log("===================")
-    console.log("Buggy way:")
-    console.log("-------------------")
-    console.log("Address  : " + keys.public_addr);
-    console.log("View Key : " + keys.view.sec);
-    console.log("Spend Key: " + keys.spend.sec);
-} else if (spend_key && view_key) {
-    console.log("/ (╯°□°）╯︵ ┻━┻")
-}
+program.parse(process.argv);

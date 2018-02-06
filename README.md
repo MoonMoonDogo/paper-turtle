@@ -1,11 +1,11 @@
 Simple mnemonic decoder
 =======================
 
-Usage: ```node mn_decode.js -d [mnemonic]```
+Usage: ```node mn_decode.js decode [mnemonic]``` or ```node mn_decode.js encode [spend_key] [view_key]```
 
 Example:
 ```
-node mn_decode.js -d "portents older banjo loyal guarded inactive often obvious coffee husband purged leopard annoyed hence edgy after lawsuit actress heron bite tipsy biscuit equip frown portents"
+node mn_decode.js decode "portents older banjo loyal guarded inactive often obvious coffee husband purged leopard annoyed hence edgy after lawsuit actress heron bite tipsy biscuit equip frown portents"
 ```
 
 Output:
